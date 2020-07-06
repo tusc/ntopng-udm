@@ -8,8 +8,8 @@ RUN apt-get update && apt-get -y install libsqlite3-0 libexpat1 redis-server lib
 RUN curl -Lo /tmp/geoipupdate_2.3.1-1_arm64.deb  http://ftp.us.debian.org/debian/pool/contrib/g/geoipupdate/geoipupdate_2.3.1-1_arm64.deb \
         && dpkg -i /tmp/geoipupdate_2.3.1-1_arm64.deb && rm /tmp/geoipupdate_2.3.1-1_arm64.deb
 
-RUN curl -Lo /tmp/ntopng-data_4.1.200705_all.deb https://github.com/tusc/ntopng-udm/blob/master/package/ntopng-data_4.1.200705_all.deb \
-        && curl -Lo /tmp/ntopng_4.1.200705-10698_arm64.deb https://github.com/tusc/ntopng-udm/blob/master/package/ntopng_4.1.200705-10698_arm64.deb \
+RUN curl -Lo /tmp/ntopng-data_4.1.200705_all.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng-data_4.1.200705_all.deb \
+        && curl -Lo /tmp/ntopng_4.1.200705-10698_arm64.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng_4.1.200705-10698_arm64.deb \
         && dpkg -i /tmp/ntopng-data_4.1.200705_all.deb \
         && dpkg -i /tmp/ntopng_4.1.200705-10698_arm64.deb
 
