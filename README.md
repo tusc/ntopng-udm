@@ -49,5 +49,5 @@ To remove the docker instance and image you'll need to type the following at the
 ```
 docker stop ntopng
 docker rm ntopng
-docker rmi docker.io/tusc/ntopng-udm
+docker rmi docker.io/tusc/ntopng-udm  (or docker rmi ntopng-image if you installed the first release)
 ```
