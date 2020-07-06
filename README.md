@@ -28,7 +28,7 @@ docker build -t ntopng-image -f /tmp/Dockerfile
 Finally, the last command will create a container with ntopng running on https port 3001
 
 ```
-docker run --net=host --name ntopng localhost/ntopng-image
+docker run -d --net=host --name ntopng localhost/ntopng-image
 ````
 Open a web browser page to your UDM's ip address with port 3001 at the end using https. For example: https://192.168.1.1:3001
 
