@@ -41,6 +41,11 @@ docker start ntopng
 
 If you're interested in compiling your own version I have a Dockerfile available here that compiles ntopng from source: https://github.com/tusc/ntopng-udm/blob/master/source/Dockerfile
 
+
+**Customize settings**
+
+The default instance will listen on the LAN interface (br0). You can edit the file /etc/ntopng/ntopng.conf to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
+
 **Uninstalling**
 
 To remove the docker instance and image you'll need to type the following at the UDM ssh prompt:
