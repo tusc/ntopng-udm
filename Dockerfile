@@ -13,16 +13,17 @@ RUN curl -Lo /tmp/ntopng-data_4.1.200705_all.deb https://github.com/tusc/ntopng-
         && dpkg -i /tmp/ntopng-data_4.1.200705_all.deb \
         && dpkg -i /tmp/ntopng_4.1.200705-10698_arm64.deb
 
-# update ntop config file
-# you can edit the file below if you want to change the default settings
+# Update ntop config file
+# You can edit the file below if you want to change the default settings
 RUN echo "-e" >> /etc/ntopng/ntopng.conf
 RUN echo "-i=br0" >> /etc/ntopng/ntopng.conf
 RUN echo "-n=1" >> /etc/ntopng/ntopng.conf
 RUN echo "-W=3001" >> /etc/ntopng/ntopng.conf
 
-# build startup script
-# note The script below will instruct ntopng to listen to br0 by default.
-# Change the -i parameter below if you want another interface
+# Build startup script
+# Note The default config will instruct ntopng to listen to br0 by default.
+# Change the -i parameter in /etc/ntopng/ntopng.conf if you want another interface.
+# You can also comment it out entirely and ntopng will let you pick an interface from UI.
 RUN echo "#!/bin/sh" > /startscript.sh
 RUN echo "/etc/init.d/redis-server start" >> /startscript.sh
 RUN echo "/usr/local/bin/ntopng /etc/ntopng/ntopng.conf" >> /startscript.sh
