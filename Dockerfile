@@ -18,7 +18,7 @@ RUN curl -Lo /tmp/ntopng-data_4.1.200705_all.deb https://github.com/tusc/ntopng-
 # Change the -i parameter below if you want another interface
 RUN echo "#!/bin/sh" > /startscript.sh
 RUN echo "/etc/init.d/redis-server start" >> /startscript.sh
-RUN echo "/usr/local/bin/ntopng -i br0 --daemon" >> /startscript.sh
+RUN echo "/usr/local/bin/ntopng -i br0 -W 3001 --daemon" >> /startscript.sh
 # Keep container running with the command below since we started
 # just background services
 RUN echo "tail -f /dev/null" >> /startscript.sh
