@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The Dockerfile in this repository will create an image based on Debian Stretch and install the ntopng packages.
 
-The first steps is to ssh into the UDM and type the following command to download the Dockerfile file:
+The first step is to ssh into the UDM and type the following command to download the Dockerfile file:
 
 ```
 curl -Lo /tmp/Dockerfile https://raw.githubusercontent.com/tusc/ntopng-udm/master/Dockerfile
