@@ -11,24 +11,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
-The Dockerfile in this repository will create an image based on Debian Stretch and install the ntopng packages.
-
-The first step is to ssh into the UDM and type the following command to download the Dockerfile file:
+The first step is to pull the image from DockerHub:
 
 ```
-curl -Lo /tmp/Dockerfile https://raw.githubusercontent.com/tusc/ntopng-udm/master/Dockerfile
+docker pull tusc/ntopng-udm:latest
 ```
-This will download a local copy of the Dockerfile to build from. The next command will build the image. This takes about a minute so have some patience. There are several packages
-that need to be added to the Debian base.
+This will download the latest image to the UDM.
+
+Next, we want to create a container with ntopng running on https port 3001 using this image.
 
 ```
-docker build -t ntopng-image -f /tmp/Dockerfile
-```
-
-Finally, the last command will create a container with ntopng running on https port 3001
-
-```
-docker run -d --net=host --name ntopng localhost/ntopng-image
+docker run -d --net=host --name ntopng docker.io/tusc/ntopng-udm
 ````
 Open a web browser page to your UDM's ip address with port 3001 at the end using https. For example: https://192.168.1.1:3001
 
@@ -54,5 +47,5 @@ To remove the docker instance and image you'll need to type the following at the
 ```
 docker stop ntopng
 docker rm ntopng
-docker rmi ntopng-image
+docker rmi docker.io/tusc/ntopng-udm
 ```
