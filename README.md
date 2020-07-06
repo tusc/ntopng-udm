@@ -41,3 +41,13 @@ docker start ntopng
 
 If you're interested in compiling your own version I have a Dockerfile available here that compiles ntopng from source: https://github.com/tusc/ntopng-udm/blob/master/source/Dockerfile
 
+**Uninstalling**
+
+To remove the docker instance and image you'll need to type the following at the UDM ssh prompt:
+
+
+```
+docker stop ntopng
+docker rm ntopng
+docker rmi ntopng-image
+```
