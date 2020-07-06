@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM aarch64/debian:stretch
 
 RUN apt-get update && apt-get -y install libsqlite3-0 libexpat1 redis-server librrd8 logrotate libcurl3 libpcap0.8 libldap-2.4-2 libhiredis0.13 \
         libssl1.0.2 libmariadbclient18 lsb-release tar ethtool libcap2 bridge-utils libnetfilter-conntrack3 libzstd1 libmaxminddb0 \
