@@ -31,6 +31,8 @@ If you have to reboot the UDM you'll have to restart the container. You can do s
 ```
 docker start ntopng
 ```
+Fortunately you can also take advantage of boostchicken's great tool to automatically start a Docker container after a reboot:
+https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
 
 If you're interested in compiling your own version I have a Dockerfile available here that compiles ntopng from source: https://github.com/tusc/ntopng-udm/blob/master/source/Dockerfile
 
