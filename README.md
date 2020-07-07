@@ -18,10 +18,24 @@ docker pull tusc/ntopng-udm:latest
 ```
 This will download the latest image to the UDM.
 
-Next, we want to create a container with ntopng running on https port 3001 using this image.
+Next, we'll need to create a directory and download some files that will be saved between upgrades. This is a one time operation.
 
 ```
-docker run -d --net=host --name ntopng docker.io/tusc/ntopng-udm
+mkdir -p /mnt/data/ntopng/redis
+chmod 777 /mnt/data/ntopng/redis
+curl -Lo /mnt/data/ntopng/ntopng.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/ntopng.conf?raw=true
+curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/redis.conf?raw=true
+```
+
+Next, we want to create a container with ntopng running on https port 3001 using this image with the above config files.
+
+```
+docker run -d --net=host --restart always \
+   --name ntopng \
+   -v /mnt/data/ntopng/redis:/var/lib/redis \
+   -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
+   -v /mnt/data/ntopng/redis.conf:/etc/redis/redis.conf \
+   docker.io/tusc/ntopng-udm:latest
 ````
 Open a web browser page to your UDM's ip address with port 3001 at the end using https. For example: https://192.168.1.1:3001
 
@@ -39,7 +53,11 @@ If you're interested in compiling your own version I have a Dockerfile available
 
 **Customize settings**
 
-The default instance will listen on the LAN interface (br0). You can edit the file /etc/ntopng/ntopng.conf to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
+The default instance will listen on the LAN interface (br0). You can edit the file /mnt/data/ntopng/ntopng.conf on the UDM to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
+
+**NOTE** If you comment out the -i interface and let ntopng startup listening to all interfaces you will have to wait up to 30 seconds for all interfaces to register. This will also consume more CPU and memory resources so be careful with this option.
+
+You can also customize the settings for the redis database if you want to eliminates database saves to storage. That file is located at /mnt/data/ntopng/redis.conf
 
 **Uninstalling**
 
@@ -51,3 +69,18 @@ docker stop ntopng
 docker rm ntopng
 docker rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
 ```
+
+**Upgrades**
+
+Whenever there is a new version of ntopng you can easily perform an upgrade by doing the following commands:
+
+```
+docker stop ntopng
+docker rm ntopng
+docker pull tusc/ntopng-udm:latest
+docker run -d --net=host --restart always \
+   --name ntopng \
+   -v /mnt/data/ntopng/redis:/var/lib/redis \
+   -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
+   -v /mnt/data/ntopng/redis.conf:/etc/redis/redis.conf \
+   docker.io/tusc/ntopng-udm:latest
