@@ -55,7 +55,7 @@ If you're interested in compiling your own version I have a Dockerfile available
 
 The default instance will listen on the LAN interface (br0). You can edit the file /mnt/data/ntopng/ntopng.conf on the UDM to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
 
-**NOTE** If you comment out the -i interface and let ntopng startup listening to all interfaces you will have to wait up to 30 seconds for all interfaces to register. This will also consume more CPU and memory resources so be careful with this option.
+**NOTE** If you comment out the -i interface and let ntopng startup listening to all interfaces you will have to wait up to 30 seconds for all interfaces to register. This will also consume additional CPU and memory resources so be careful with this option.
 
 You can also customize the settings for the redis database if you want to eliminates database saves to storage. That file is located at /mnt/data/ntopng/redis.conf
 
