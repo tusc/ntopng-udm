@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
-The first step is to pull the image from DockerHub:
+The first step is to pull the image from DockerHub. Log into the UDM via ssh and type the following command:
 
 ```
 docker pull tusc/ntopng-udm:latest
