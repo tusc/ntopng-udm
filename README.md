@@ -22,6 +22,7 @@ Next, we'll need to create a directory and download some files that will be save
 
 ```
 mkdir -p /mnt/data/ntopng/redis
+mkdir -p /mnt/data/ntopng/lib
 chmod 777 /mnt/data/ntopng/redis
 curl -Lo /mnt/data/ntopng/ntopng.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/ntopng.conf?raw=true
 curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/redis.conf?raw=true
@@ -83,6 +84,7 @@ docker run -d --net=host --restart always \
    -v /mnt/data/ntopng/redis:/var/lib/redis \
    -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
    -v /mnt/data/ntopng/redis.conf:/etc/redis/redis.conf \
+   -v /mnt/data/ntopng/lib:/var/lib/ntopng \   
    docker.io/tusc/ntopng-udm:latest
 ```
 
