@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 The first step is to pull the image from DockerHub. Log into the UDM via ssh and type the following command:
 
 ```
-docker pull tusc/ntopng-udm:latest
+podman pull tusc/ntopng-udm:latest
 ```
 This will download the latest image to the UDM.
 
@@ -31,7 +31,7 @@ curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/mas
 Next, we want to create a container with ntopng running on https port 3001 using this image with the above config files.
 
 ```
-docker run -d --net=host --restart always \
+podman run -d --net=host --restart always \
    --name ntopng \
    -v /mnt/data/ntopng/redis:/var/lib/redis \
    -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
@@ -44,7 +44,7 @@ Open a web browser page to your UDM's ip address with port 3001 at the end using
 If you have to reboot the UDM you'll have to restart the container. You can do so by typing the following:
 
 ```
-docker start ntopng
+podman start ntopng
 ```
 Fortunately you can also take advantage of boostchicken's great tool to automatically start a Docker container after a reboot:
 https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
@@ -66,9 +66,9 @@ To remove the docker instance and image you'll need to type the following at the
 
 
 ```
-docker stop ntopng
-docker rm ntopng
-docker rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
+podman stop ntopng
+podman rm ntopng
+podman rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
 ```
 
 **Upgrades**
@@ -76,10 +76,10 @@ docker rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you insta
 Whenever there is a new version of ntopng you can easily perform an upgrade by doing the following commands:
 
 ```
-docker stop ntopng
-docker rm ntopng
-docker pull tusc/ntopng-udm:latest
-docker run -d --net=host --restart always \
+podman stop ntopng
+podman rm ntopng
+podman pull tusc/ntopng-udm:latest
+podman run -d --net=host --restart always \
    --name ntopng \
    -v /mnt/data/ntopng/redis:/var/lib/redis \
    -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
@@ -95,5 +95,5 @@ https://www.ntop.org/guides/ntopng/faq.html#cannot-login-into-the-gui
 
 You have to connect to the containter in order to run the redis commands as reference in the FAQ. Do so by typing the following below. You can type "exit" to get out of the container when you're done.
 ```
-docker exec -it ntopng bash
+podman exec -it ntopng bash
 ```
