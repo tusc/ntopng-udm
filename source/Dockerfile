@@ -28,20 +28,19 @@ RUN apt-get update && apt-get -y install build-essential \
         dpkg-sig
 
 # build nDPI which is required by ntopng
-#RUN cd /root \
-#        && git clone https://github.com/ntop/nDPI.git; cd nDPI; ./autogen.sh; make -j4
+RUN cd /root \
+        && git clone https://github.com/ntop/nDPI.git; cd nDPI; ./autogen.sh; make -j4
 
 
 # build ntopng
-#RUN cd /root \
-#        && git clone https://github.com/ntop/ntopng \
-#        && cd ntopng \
-#        && ./autogen.sh \
-#        && ./configure \
-#        && make -j4 \
-#        && make install
+RUN cd /root \
+        && git clone https://github.com/ntop/ntopng \
+        && cd ntopng \
+        && ./autogen.sh \
+        && ./configure \
+        && make -j4 \
 
 # build deb packages
 # This requires you have a .gnupg directory present as the Makefile will try to sign all the deb packages
 # you can optionally comment those lines out
-#RUN cd packages/ubuntu && ./configure && make
+RUN cd packages/ubuntu && ./configure && make
