@@ -96,7 +96,7 @@ podman run -d --net=host --restart always \
 If for whatever reason you find yourself locked out of the ntopng login prompt you can follow the steps on this page for resetting the password:
 https://www.ntop.org/guides/ntopng/faq.html#cannot-login-into-the-gui
 
-You have to connect to the containter in order to run the redis commands as reference in the FAQ. Do so by typing the following below. You can type "exit" to get out of the container when you're done.
+You have to connect to the containter in order to run the redis commands as referenced in the FAQ. Do so by typing the following below. You can type "exit" to get out of the container when you're done.
 ```
 podman exec -it ntopng bash
 ```
