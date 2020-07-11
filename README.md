@@ -20,7 +20,7 @@ podman pull tusc/ntopng-udm:latest
 ```
 This will download the latest image to the UDM.
 
-Next, we'll need to create a directory and download some files that will be saved between upgrades. This is a one time operation.
+Next, we'll need to create two directories and download config files that will be saved between upgrades. This is a one time operation.
 
 ```
 mkdir -p /mnt/data/ntopng/redis
