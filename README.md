@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
-This is a prebuilt image of ntopng to run directly on an UDM or UDM PRO. The Docker image has been configured to perserve information between upgrades. ntopng uses an in memory database known as redis so writes to disk are minimal. In addition, the timeseries database (RRD) does not require much disk space. https://www.ntop.org/ntopng/ntopng-disk-requirements-for-timeseries-and-flows/. You can optionally configure the timeseries database to point to an external Influx database.
+This is a prebuilt image of ntopng to run directly on an UDM or UDM PRO. The Docker image has been configured to perserve data between upgrades. ntopng uses an in memory database known as redis so writes to disk are minimal. In addition, the timeseries database (RRD) does not require much disk space. https://www.ntop.org/ntopng/ntopng-disk-requirements-for-timeseries-and-flows/. You can optionally configure the timeseries database to point to an external Influx database.
 
 In order to install this image you will need to log into the UDM via ssh and type the following command:
 
