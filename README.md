@@ -11,6 +11,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
+# Installing
+
 This is a prebuilt image of ntopng to run directly on an UDM or UDM PRO. The Docker image has been configured to perserve data between upgrades. ntopng uses an in memory database known as redis so writes to disk are minimal. In addition, the timeseries database (RRD) does not require much disk space. https://www.ntop.org/ntopng/ntopng-disk-requirements-for-timeseries-and-flows/. You can optionally configure the timeseries database to point to an external Influx database.
 
 In order to install this image you will need to log into the UDM via ssh and type the following command:
@@ -55,7 +57,7 @@ https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
 If you're interested in compiling your own version I have a Dockerfile available here that compiles ntopng from source: https://github.com/tusc/ntopng-udm/blob/master/source/Dockerfile
 
 
-**Customize settings**
+# Customize settings
 
 The default instance will listen on the LAN interface (br0). You can edit the file /mnt/data/ntopng/ntopng.conf on the UDM to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
 
@@ -63,18 +65,8 @@ The default instance will listen on the LAN interface (br0). You can edit the fi
 
 You can also customize the settings for the redis database if you want to eliminates database saves to storage. That file is located at /mnt/data/ntopng/redis.conf
 
-**Uninstalling**
 
-To remove the docker instance and image you'll need to type the following at the UDM ssh prompt:
-
-
-```
-podman stop ntopng
-podman rm ntopng
-podman rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
-```
-
-**Upgrades**
+# Upgrades
 
 Whenever there is a new version of ntopng you can easily perform an upgrade by doing the following commands:
 
@@ -91,7 +83,18 @@ podman run -d --net=host --restart always \
    docker.io/tusc/ntopng-udm:latest
 ```
 
-**Console Lockout**
+# Uninstalling
+
+To remove the docker instance and image you'll need to type the following at the UDM ssh prompt:
+
+
+```
+podman stop ntopng
+podman rm ntopng
+podman rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
+```
+
+# Console Lockout
 
 If for whatever reason you find yourself locked out of the ntopng login prompt you can follow the steps on this page for resetting the password:
 https://www.ntop.org/guides/ntopng/faq.html#cannot-login-into-the-gui
