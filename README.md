@@ -58,7 +58,7 @@ If you're interested in compiling your own version I have a Dockerfile available
 
 # GeoIP integration
 
-If you want to see country flags next to hosts you'll need to setup a free account with maxmind.com. Follow the instructions on this page and save the downloaded GeoIP.conf file on the UDM in the past /mnt/data/ntopng/GeoIP.conf. https://github.com/ntop/ntopng/blob/dev/doc/README.geolocation.md#using-geolocation-in-ntopng.<br/>
+If you want to see country flags next to hosts you'll need to setup a free account with maxmind.com. Follow the instructions from the link below and save the downloaded GeoIP.conf file on the UDM in the path /mnt/data/ntopng/GeoIP.conf. https://github.com/ntop/ntopng/blob/dev/doc/README.geolocation.md#using-geolocation-in-ntopng.<br/>
 
 When prompted on the version of geoipupdate select the option for older than 3.1.1.
 
