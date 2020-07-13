@@ -25,7 +25,6 @@ RUN echo "-W=3001" >> /etc/ntopng/ntopng.conf
 
 # build startup script
 # note The script below will instruct ntopng to listen to br0 by default.
-# Change the -i parameter below if you want another interface
 RUN echo "#!/bin/bash" > /startscript.sh
 RUN echo "/etc/init.d/redis-server start" >> /startscript.sh
 # check if GeoIP.conf is populated. If so run geoipupdate
