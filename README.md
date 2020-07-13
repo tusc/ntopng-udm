@@ -27,7 +27,7 @@ Next, we'll need to create two directories and download config files that will b
 ```
 mkdir -p /mnt/data/ntopng/redis
 mkdir -p /mnt/data/ntopng/lib
-chmod 777 /mnt/data/ntopng/redis
+touch /mnt/data/ntopngs/GeoIP.conf
 curl -Lo /mnt/data/ntopng/ntopng.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/ntopng.conf?raw=true
 curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/redis.conf?raw=true
 ```
@@ -37,10 +37,10 @@ Next, we want to create a container with ntopng running on https port 3001 using
 ```
 podman run -d --net=host --restart always \
    --name ntopng \
-   -v /mnt/data/ntopng/redis:/var/lib/redis \
+   -v /mnt/data/ntopng/GeoIP.conf:/etc/GeoIP.conf \
    -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
    -v /mnt/data/ntopng/redis.conf:/etc/redis/redis.conf \
-   -v /mnt/data/ntopng/lib:/var/lib/ntopng \      
+   -v /mnt/data/ntopng/lib:/var/lib/ntopng \
    docker.io/tusc/ntopng-udm:latest
 ````
 Open a web browser page to your UDM's ip address with port 3001 at the end using https. For example: https://192.168.1.1:3001
@@ -56,6 +56,13 @@ https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
 
 If you're interested in compiling your own version I have a Dockerfile available here that compiles ntopng from source: https://github.com/tusc/ntopng-udm/blob/master/source/Dockerfile
 
+# GeoIP integration
+
+If you want to see country flags next to hosts you'll need to setup a free account with maxmind.com. Follow the instructions on this page and save the downloaded GeoIP.conf file on the UDM in the past /mnt/data/ntopng/GeoIP.conf. https://github.com/ntop/ntopng/blob/dev/doc/README.geolocation.md#using-geolocation-in-ntopng.<br/>
+
+When prompted on the version of geoipupdate select the option for older than 3.1.1.
+
+Anytime the docker container is started it will run a geoipupdate to download the latest maps.
 
 # Customize settings
 
@@ -76,10 +83,10 @@ podman rm ntopng
 podman pull tusc/ntopng-udm:latest
 podman run -d --net=host --restart always \
    --name ntopng \
-   -v /mnt/data/ntopng/redis:/var/lib/redis \
+   -v /mnt/data/ntopng/GeoIP.conf:/etc/GeoIP.conf \
    -v /mnt/data/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
    -v /mnt/data/ntopng/redis.conf:/etc/redis/redis.conf \
-   -v /mnt/data/ntopng/lib:/var/lib/ntopng \   
+   -v /mnt/data/ntopng/lib:/var/lib/ntopng \
    docker.io/tusc/ntopng-udm:latest
 ```
 
