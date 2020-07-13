@@ -26,8 +26,15 @@ RUN echo "-W=3001" >> /etc/ntopng/ntopng.conf
 # build startup script
 # note The script below will instruct ntopng to listen to br0 by default.
 # Change the -i parameter below if you want another interface
-RUN echo "#!/bin/sh" > /startscript.sh
+RUN echo "#!/bin/bash" > /startscript.sh
 RUN echo "/etc/init.d/redis-server start" >> /startscript.sh
+# check if GeoIP.conf is populated. If so run geoipupdate
+RUN echo "if [ -s /etc/GeoIP.conf ]" >> /startscript.sh
+RUN echo "then" >> /startscript.sh
+RUN echo "   echo 'Please wait, geoipupdate is running'" >> /startscript.sh
+RUN echo "   /usr/bin/geoipupdate" >> /startscript.sh
+RUN echo "fi" >> /startscript.sh
+# start ntopng
 RUN echo "/usr/local/bin/ntopng /etc/ntopng/ntopng.conf" >> /startscript.sh
 # Keep container running with the command below since we started
 # just background services
