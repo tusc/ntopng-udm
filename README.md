@@ -27,7 +27,7 @@ Next, we'll need to create two directories and download config files that will b
 ```
 mkdir -p /mnt/data/ntopng/redis
 mkdir -p /mnt/data/ntopng/lib
-touch /mnt/data/ntopngs/GeoIP.conf
+touch /mnt/data/ntopng/GeoIP.conf
 curl -Lo /mnt/data/ntopng/ntopng.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/ntopng.conf?raw=true
 curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/redis.conf?raw=true
 ```
