@@ -62,7 +62,7 @@ If you want to see country flags next to hosts you'll need to setup a free accou
 
 When prompted on the version of geoipupdate select the option for older than 3.1.1.
 
-Once you are done you can start the container. Anytime the docker container is started it will run a geoipupdate to download the latest maps.
+Once you are done you can start the container. Anytime the docker container is started it will run a geoipupdate to download the latest GeoIP data.
 
 # Customize settings
 
