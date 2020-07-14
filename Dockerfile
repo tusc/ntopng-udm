@@ -12,11 +12,6 @@ RUN curl -Lo /tmp/geoipupdate_2.3.1-1_arm64.deb  http://ftp.us.debian.org/debian
 COPY packages/*200711* /tmp/
 RUN dpkg -i /tmp/ntopng-data_4.1.200711_all.deb /tmp/ntopng_4.1.200711-10754_arm64.deb && rm /tmp/ntop*.deb
 
-#RUN curl -Lo /tmp/ntopng-data_4.1.200711_all.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng-data_4.1.200711_all.deb?raw=true \
-#        && curl -Lo /tmp/ntopng_4.1.200711-10754_arm64.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng_4.1.200711-10754_arm64.deb?raw=true \
-#        && dpkg -i /tmp/ntopng-data_4.1.200711_all.deb \
-#        && dpkg -i /tmp/ntopng_4.1.200711-10754_arm64.deb
-
 # update ntop config file
 RUN echo "-e" >> /etc/ntopng/ntopng.conf
 RUN echo "-i=br0" >> /etc/ntopng/ntopng.conf
