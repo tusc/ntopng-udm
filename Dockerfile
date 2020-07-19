@@ -1,3 +1,5 @@
+FROM arm64v8/debian:buster-slim
+
 # necessary for running build from x86 environments
 ADD qemu-aarch64-static /usr/bin
 
