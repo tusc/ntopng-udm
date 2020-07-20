@@ -3,25 +3,22 @@ FROM arm64v8/debian:buster-slim
 # necessary for running build from x86 environments
 ADD qemu-aarch64-static /usr/bin
 
-RUN apt-get update && apt-get -y install libsqlite3-0 libexpat1 redis-server librrd8 logrotate libcurl4 libpcap0.8 libldap-2.4-2 libhiredis0.14 \
+RUN apt-get update && apt-get --no-install-recommends -y install libsqlite3-0 libexpat1 redis-server librrd8 logrotate libcurl4 libpcap0.8 libldap-2.4-2 libhiredis0.14 \
         libssl1.1 libmariadbd19 lsb-release tar ethtool libcap2 bridge-utils libnetfilter-conntrack3 libzstd1 libmaxminddb0 \
-        libradcli4 libjson-c3 libsnmp30 udev libzmq5 libcurl3-gnutls net-tools curl procps
+        libradcli4 libjson-c3 libsnmp30 udev libzmq5 libcurl3-gnutls net-tools curl procps && rm -rf /var/lib/apt/lists/*
 
 # grab geoipupdate from the Debian contrib repository
 RUN curl -Lo /tmp/geoipupdate_2.3.1-1_arm64.deb  http://ftp.us.debian.org/debian/pool/contrib/g/geoipupdate/geoipupdate_2.3.1-1_arm64.deb \
         && dpkg -i /tmp/geoipupdate_2.3.1-1_arm64.deb && rm /tmp/geoipupdate_2.3.1-1_arm64.deb
 
-RUN curl -Lo /tmp/ntopng-data_4.1.200711_all.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng-data_4.1.200711_all.deb?raw=true \
-        && curl -Lo /tmp/ntopng_4.1.200711-10754_arm64.deb https://github.com/tusc/ntopng-udm/blob/master/packages/ntopng_4.1.200711-10754_arm64.deb?raw=true \
-        && dpkg -i /tmp/ntopng-data_4.1.200711_all.deb \
-        && dpkg -i /tmp/ntopng_4.1.200711-10754_arm64.deb
+COPY packages/*200711* /tmp/
+RUN dpkg -i /tmp/ntopng-data_4.1.200711_all.deb /tmp/ntopng_4.1.200711-10754_arm64.deb && rm /tmp/ntop*.deb
 
 # update ntop config file
 RUN echo "-e" >> /etc/ntopng/ntopng.conf
 RUN echo "-i=br0" >> /etc/ntopng/ntopng.conf
 RUN echo "-n=1" >> /etc/ntopng/ntopng.conf
 RUN echo "-W=3001" >> /etc/ntopng/ntopng.conf
-
 
 # build startup script
 # note The script below will instruct ntopng to listen to br0 by default.
