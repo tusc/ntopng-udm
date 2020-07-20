@@ -32,7 +32,7 @@ Next, we'll need to create two directories and download config files that will b
 ```
 mkdir -p /mnt/data/ntopng/redis
 mkdir -p /mnt/data/ntopng/lib
-touch /mnt/data/ntopngs/GeoIP.conf
+touch /mnt/data/ntopng/GeoIP.conf
 curl -Lo /mnt/data/ntopng/ntopng.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/ntopng.conf?raw=true
 curl -Lo /mnt/data/ntopng/redis.conf https://github.com/tusc/ntopng-udm/blob/master/ntopng/redis.conf?raw=true
 ```
@@ -63,11 +63,11 @@ If you're interested in compiling your own version I have a Dockerfile available
 
 # GeoIP integration
 
-If you want to see country flags next to hosts you'll need to setup a free account with maxmind.com. Follow the instructions from the link below and save the downloaded GeoIP.conf file on the UDM in the path /mnt/data/ntopng/GeoIP.conf. https://github.com/ntop/ntopng/blob/dev/doc/README.geolocation.md#using-geolocation-in-ntopng.<br/>
+If you want to see country flags next to hosts you'll need to setup a free account with maxmind.com. Follow the instructions from the link below and save the downloaded GeoIP.conf file on the UDM in the path /mnt/data/ntopng/GeoIP.conf. You can use scp or winscp to transfer the file over.  https://github.com/ntop/ntopng/blob/dev/doc/README.geolocation.md#using-geolocation-in-ntopng. Step 0 (geoipudate) has been done for you as it's included in this image.<br/>
 
 When prompted on the version of geoipupdate select the option for older than 3.1.1.
 
-Anytime the docker container is started it will run a geoipupdate to download the latest maps.
+Once you are done you can start the container. Anytime the docker container is started it will run a geoipupdate to download the latest GeoIP data.
 
 # Customize settings
 
