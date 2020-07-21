@@ -8,6 +8,11 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+## Building
+Build on your UDM or build on another device using buildx and targeting arm64
+```
+docker buildx build --platform linux/arm64 -t ntopng:latest --load .
+```
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
@@ -66,13 +71,17 @@ Once you are done you can start the container. Anytime the docker container is s
 
 # Customize settings
 
-The default instance will listen on the LAN interface (br0). You can edit the file /mnt/data/ntopng/ntopng.conf on the UDM to change the settings. The default is -e (daemon mode), -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
+The default instance will listen on the LAN interface (br0). You can edit the file /mnt/data/ntopng/ntopng.conf on the UDM to change the settings. The default is -i=br0 (LAN), n=1 ( Decode DNS responses and resolve all numeric IPs ) and -W3001 (enable HTTPS port)
 
 **NOTE** If you comment out the -i interface and let ntopng startup listening to all interfaces you will have to wait up to 30 seconds for all interfaces to register. This will also consume additional CPU and memory resources so be careful with this option.
 
 You can also customize the settings for the redis database if you want to eliminates database saves to storage. That file is located at /mnt/data/ntopng/redis.conf
 
-
+# Disable Redis
+If you want to disable Redis and use an external server just set the env var "DISABLE_REDIS"
+```
+docker run -e DISABLE_REDIS=true boostchicken/ntopng
+```
 # Upgrades
 
 Whenever there is a new version of ntopng you can easily perform an upgrade by doing the following commands:
