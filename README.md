@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Building
 Build on your UDM or build on another device using buildx and targeting arm64
 ```
-docker buildx build --platform linux/arm64 -t ntopng:latest --load .
+docker buildx build --platform linux/arm64 -t ntopng-udm:latest --load .
 ```
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
@@ -80,7 +80,7 @@ You can also customize the settings for the redis database if you want to elimin
 # Disable Redis
 If you want to disable Redis and use an external server just set the env var "DISABLE_REDIS"
 ```
-docker run -e DISABLE_REDIS=true boostchicken/ntopng
+docker run -e DISABLE_REDIS=true tusc/ntopng-udm
 ```
 # Upgrades
 
