@@ -8,11 +8,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## Building
-Build on your UDM or build on another device using buildx and targeting arm64
-```
-docker buildx build --platform linux/arm64 -t ntopng-udm:latest --load .
-```
 ## Project Notes
 **Author:** Carlos Talbot (@tusc69 on ubnt forums)
 
@@ -81,6 +76,11 @@ You can also customize the settings for the redis database if you want to elimin
 If you want to disable Redis and use an external server just set the env var "DISABLE_REDIS"
 ```
 docker run -e DISABLE_REDIS=true tusc/ntopng-udm
+```
+## Building
+Build on your UDM or build on another device using buildx and targeting arm64
+```
+docker buildx build --platform linux/arm64 -t ntopng-udm:latest --load .
 ```
 # Upgrades
 
