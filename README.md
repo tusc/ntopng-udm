@@ -43,6 +43,18 @@ podman run -d --net=host --restart always \
    -v /mnt/data/ntopng/lib:/var/lib/ntopng \
    docker.io/tusc/ntopng-udm:latest
 ````
+NOTE: If you prefer to use the external drive on the UMD pro to store the persistent data you can use the following to start up ntopng. Make sure to replace all references above from /mnt/data to /mnt/data_ext:
+
+```
+podman run -d --net=host --restart always \
+   --name ntopng \
+   -v /mnt/data_ext/ntopng/GeoIP.conf:/etc/GeoIP.conf \
+   -v /mnt/data_ext/ntopng/ntopng.conf:/etc/ntopng/ntopng.conf \
+   -v /mnt/data_ext/ntopng/redis.conf:/etc/redis/redis.conf \
+   -v /mnt/data_ext/ntopng/lib:/var/lib/ntopng \
+   docker.io/tusc/ntopng-udm:latest
+```
+
 Open a web browser page to your UDM's ip address with port 3001 at the end using https. For example: https://192.168.1.1:3001
 
 
