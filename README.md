@@ -99,9 +99,9 @@ docker buildx build --platform linux/arm64 -t ntopng-udm:latest --load .
 Whenever there is a new version of ntopng you can easily perform an upgrade by doing the following commands:
 
 ```
+podman pull tusc/ntopng-udm:latest
 podman stop ntopng
 podman rm ntopng
-podman pull tusc/ntopng-udm:latest
 podman run -d --net=host --restart always \
    --name ntopng \
    -v /mnt/data/ntopng/GeoIP.conf:/etc/GeoIP.conf \
