@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 COPY entrypoint.sh /entrypoint.sh
-COPY packages/*200711*.deb /tmp
+COPY packages/*201206*.deb /tmp/
 
 RUN apt-get update && apt-get --no-install-recommends -y install libsqlite3-0 libexpat1 redis-server librrd8 logrotate libcurl4 libpcap0.8 libldap-2.4-2 libhiredis0.14 \
             libssl1.1 libmariadbd19 lsb-release tar ethtool libcap2 bridge-utils libnetfilter-conntrack3 libzstd1 libmaxminddb0 \
