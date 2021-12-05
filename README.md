@@ -119,7 +119,7 @@ To remove the docker instance and image you'll need to type the following at the
 ```
 podman stop ntopng
 podman rm ntopng
-podman rmi docker.io/tusc/ntopng-udm  (or "docker rmi ntopng-image" if you installed the first release)
+podman rmi docker.io/tusc/ntopng-udm  #(or "docker rmi ntopng-image" if you installed the first release)
 ```
 
 # Console Lockout
