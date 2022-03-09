@@ -62,9 +62,9 @@ RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --b
 RUN cd /root/ntopng && ./autogen.sh && ./configure && make -j4
 
 RUN mkdir -p /root/dat_files && cd /root/dat_files && \
-    wget https://download.db-ip.com/free/dbip-country-lite-2021-12.mmdb.gz && \
-    wget https://download.db-ip.com/free/dbip-city-lite-2021-12.mmdb.gz && \
-    wget https://download.db-ip.com/free/dbip-asn-lite-2021-12.mmdb.gz && \
+    wget https://download.db-ip.com/free/dbip-country-lite-$(date +"%Y-%m").mmdb.gz && \
+    wget https://download.db-ip.com/free/dbip-city-lite-$(date +"%Y-%m").mmdb.gz && \
+    wget https://download.db-ip.com/free/dbip-asn-lite-$(date +"%Y-%m").mmdb.gz && \
     gunzip ./*
 
 # build deb packages
