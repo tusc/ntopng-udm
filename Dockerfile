@@ -3,7 +3,7 @@ FROM debian:bullseye-slim
 RUN mkdir -p /root/packages
 
 COPY entrypoint.sh /entrypoint.sh
-COPY packages/*_5.1*.deb /root/packages
+COPY packages/*.deb /root/packages
 
 RUN sed -i -e's/ main/ main contrib/g' /etc/apt/sources.list && \
     apt-get update && apt-get --no-install-recommends -y install \
