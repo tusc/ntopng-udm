@@ -1,7 +1,9 @@
 FROM debian:bullseye-slim
 
+RUN mkdir -p /root/packages
+
 COPY entrypoint.sh /entrypoint.sh
-COPY packages/*_5.1*.deb /tmp/
+COPY packages/*_5.1*.deb /root/packages
 
 RUN sed -i -e's/ main/ main contrib/g' /etc/apt/sources.list && \
     apt-get update && apt-get --no-install-recommends -y install \
@@ -39,7 +41,7 @@ RUN sed -i -e's/ main/ main contrib/g' /etc/apt/sources.list && \
 
 RUN curl -Lo /tmp/geoipupdate_2.3.1-1_arm64.deb http://ftp.us.debian.org/debian/pool/contrib/g/geoipupdate/geoipupdate_2.3.1-1_arm64.deb
 
-RUN dpkg -i /tmp/*.deb && rm /tmp/*.deb && mkdir -p /etc/ntopng && echo "-i=br0\n-n=1\n-W=3001" >> /etc/ntopng/ntopng.conf && chmod +x /entrypoint.sh
+RUN dpkg -i /root/packages/*.deb && mkdir -p /etc/ntopng && echo "-i=br0\n-n=1\n-W=3001" >> /etc/ntopng/ntopng.conf && chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
