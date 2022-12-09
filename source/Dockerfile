@@ -53,7 +53,7 @@ RUN apt-get update && apt install -y apt-utils && apt-get --no-install-recommend
 
 
 # build nDPI which is required by ntopng
-RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/nDPI.git --branch 4.4-stable
+RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/nDPI.git --branch dev
 RUN cd /root/nDPI && ./autogen.sh && ./configure && make -j8
 
 
