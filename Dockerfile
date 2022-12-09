@@ -18,6 +18,7 @@ RUN sed -i -e's/ main/ main contrib/g' /etc/apt/sources.list && \
             libhiredis0.14 \
             libssl1.0 \
             libmariadb3 \
+            librdkafka1 \
             whiptail \
             libnuma1 \
             libnetfilter-queue1 \
