@@ -53,13 +53,13 @@ RUN apt-get update && apt install -y apt-utils && apt-get --no-install-recommend
 
 
 # build nDPI which is required by ntopng
-RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/nDPI.git --branch dev
-RUN cd /root/nDPI && ./autogen.sh && ./configure && make -j4
+RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/nDPI.git --branch 5.2-stable
+RUN cd /root/nDPI && ./autogen.sh && ./configure && make -j8
 
 
 # build ntopng
-RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch dev
-RUN cd /root/ntopng && ./autogen.sh && ./configure && make -j4
+RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch 5.2-stable
+RUN cd /root/ntopng && ./autogen.sh && ./configure && make -j8
 
 RUN mkdir -p /root/dat_files && cd /root/dat_files && \
     wget https://download.db-ip.com/free/dbip-country-lite-$(date +"%Y-%m").mmdb.gz && \
