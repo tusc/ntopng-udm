@@ -58,8 +58,8 @@ RUN cd /root/nDPI && ./autogen.sh && ./configure && make -j8
 
 
 # build ntopng
-RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch dev && git checkout c10ae0c105a4fd6983d58dcef638f2612b7b1993
-RUN cd /root/ntopng && ./autogen.sh && ./configure && make -j8
+RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch dev
+RUN cd /root/ntopng && git checkout c10ae0c105a4fd6983d58dcef638f2612b7b1993 && ./autogen.sh && ./configure && make -j8
 
 RUN mkdir -p /root/dat_files && cd /root/dat_files && \
     wget https://download.db-ip.com/free/dbip-country-lite-$(date +"%Y-%m").mmdb.gz && \
