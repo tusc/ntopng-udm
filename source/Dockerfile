@@ -58,7 +58,7 @@ RUN cd /root/nDPI && ./autogen.sh && ./configure && make -j8
 
 
 # build ntopng
-RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch 5.2-stable
+RUN cd /root && GIT_SSL_NO_VERIFY=1 git clone https://github.com/ntop/ntopng --branch 5.4-stable
 RUN cd /root/ntopng && ./autogen.sh && ./configure && make -j8
 
 RUN mkdir -p /root/dat_files && cd /root/dat_files && \
